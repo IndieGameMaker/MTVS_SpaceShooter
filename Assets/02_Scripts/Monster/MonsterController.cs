@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+// 몬스터 캐릭터 컨트롤러 클래스
 public class MonsterController : MonoBehaviour
 {
     // 몬스터 상태 정의 (Enum)
