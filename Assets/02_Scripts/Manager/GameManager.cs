@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
         // Invoke("함수명", 지연시간)
         // InvokeRepeating("함수명", 지연시간, 반복간격)
         
-        InvokeRepeating("CreateMonster", 1.0f, _createTime);
+        InvokeRepeating(nameof(CreateMonster) , 1.0f, _createTime);
     }
 
     private void CreateMonster()
