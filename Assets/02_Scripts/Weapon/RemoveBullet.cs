@@ -25,7 +25,9 @@ public class RemoveBullet : MonoBehaviour
             GameObject spark = Instantiate(_sparkEffect, point, rot);
             Destroy(spark, 0.5f);
             
-            Destroy(coll.gameObject); // 충돌한 게임오브젝트
+            // Destroy(coll.gameObject); // 충돌한 게임오브젝트
+            // Pool로 환원
+            BulletPool.Instance.Return(coll.gameObject.GetComponent<Bullet>());
 
             // Destroy(this); // 스크립트가 삭제
             // Destroy(this.gameObject); // 벽 삭제

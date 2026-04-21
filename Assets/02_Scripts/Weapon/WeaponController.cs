@@ -53,7 +53,11 @@ public class WeaponController : MonoBehaviour
             {
                 _nextFire = Time.time + _fireRate;
                 
-                Instantiate(_bulletPrefab, _firePos.position, _firePos.rotation);
+                // Instantiate(_bulletPrefab, _firePos.position, _firePos.rotation);
+                // Pool 에서 가져오기
+                var bullet = BulletPool.Instance.Get();
+                bullet.Fire(_firePos.position,  _firePos.rotation);
+                
                 // 음원 재생
                 // AudioSource.Play("음원이름");
                 // AudioSource.PlayOneShot(AudioClip, 볼륨);
