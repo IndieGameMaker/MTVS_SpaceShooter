@@ -8,7 +8,9 @@ public class GameManager : MonoBehaviour
     // 전역 접근 가능 (static)
     public static GameManager Instance = null;
     
-    [SerializeField] private List<Transform> points = new List<Transform>();
+    [SerializeField] private List<Transform> _points = new List<Transform>();
+    [SerializeField] private GameObject _monsterPrefab;
+    [SerializeField] private float _createTime = 3.0f;
 
     private void Awake()
     {
@@ -26,6 +28,21 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         var spawnPointGroup = GameObject.Find("SpawnPointGroup").transform;
-        spawnPointGroup.GetComponentsInChildren<Transform>(points);
+        spawnPointGroup.GetComponentsInChildren<Transform>(_points);
+        
+        // 몬스터 프리팹 로딩
+        _monsterPrefab = Resources.Load<GameObject>("Monster");
+    }
+
+    private void CreateMonster()
+    {
+        // 난수 발생
+        int idx = Random.Range(1, _points.Count);
+
+        var monster = Instantiate(_monsterPrefab);
+        monster.name = $"Monster_{idx}";
+
+        monster.transform.position = _points[idx].position;
+        monster.transform.rotation = Quaternion.identity;
     }
 }
