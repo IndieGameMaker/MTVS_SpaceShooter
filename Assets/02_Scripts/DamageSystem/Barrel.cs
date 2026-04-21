@@ -1,7 +1,7 @@
 using Unity.Cinemachine;
 using UnityEngine;
 
-public class Barrel : MonoBehaviour
+public class Barrel : MonoBehaviour, IDamageable
 {
     // 스크립터블오브젝트 참조
     [SerializeField] private BarrelDataSO _barrelData;
@@ -24,18 +24,18 @@ public class Barrel : MonoBehaviour
         _impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
-    private void OnCollisionEnter(Collision coll)
-    {
-        if (coll.collider.CompareTag(TAG_BULLET))
-        {
-            //_hitCount++;
-            if (++_hitCount == 3)
-            {
-                // 폭발효과 연출
-                ExpBarrel();
-            }
-        }
-    }
+    // private void OnCollisionEnter(Collision coll)
+    // {
+    //     if (coll.collider.CompareTag(TAG_BULLET))
+    //     {
+    //         //_hitCount++;
+    //         if (++_hitCount == 3)
+    //         {
+    //             // 폭발효과 연출
+    //             ExpBarrel();
+    //         }
+    //     }
+    // }
 
     private void ExpBarrel()
     {
@@ -70,5 +70,15 @@ public class Barrel : MonoBehaviour
         
         // 드럼통 소멸 처리
         Destroy(gameObject, 3.0f);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        //_hitCount++;
+        if (++_hitCount == 3)
+        {
+            // 폭발효과 연출
+            ExpBarrel();
+        }        
     }
 }
