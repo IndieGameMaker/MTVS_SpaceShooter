@@ -66,6 +66,7 @@ public class WeaponController : MonoBehaviour
                 if (Physics.Raycast(_firePos.position, _firePos.forward, out RaycastHit hit, 10.0f, _fireMask))
                 {
                     Debug.Log($"Hit : {hit.collider.name}");
+                    hit.collider.GetComponent<IDamageable>().TakeDamage(25);
                 }                
             }
         }
