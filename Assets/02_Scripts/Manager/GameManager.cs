@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -6,6 +7,8 @@ public class GameManager : MonoBehaviour
     // 인스턴스를 생성
     // 전역 접근 가능 (static)
     public static GameManager Instance = null;
+    
+    [SerializeField] private List<Transform> points = new List<Transform>();
 
     private void Awake()
     {
@@ -18,5 +21,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        var spawnPointGroup = GameObject.Find("SpawnPointGroup").transform;
+        spawnPointGroup.GetComponentsInChildren<Transform>(points);
     }
 }
