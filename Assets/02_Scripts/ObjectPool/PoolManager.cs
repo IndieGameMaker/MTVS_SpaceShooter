@@ -9,7 +9,7 @@ public class PoolManager<T> : IDisposable where T : MonoBehaviour
     private readonly IObjectPool<T> _pool;
     
     // 생성자 선언 (Constructor)
-    public PoolManager(T prefab, int defualtCapacity = 5, int maxSize = 10)
+    public PoolManager(T prefab, int defualtCapacity = 3, int maxSize = 5)
     {
         // 풀 초기화
         _pool = new UnityEngine.Pool.ObjectPool<T>

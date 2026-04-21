@@ -50,6 +50,9 @@ public class MonsterController : MonoBehaviour
     {
         // 이벤트 구독 (Subscribe)
         PlayerController.OnPlayerDead += this.OnPlayerDead;
+        
+        StartCoroutine(CheckMonsterState());
+        StartCoroutine(MonsterAction());        
     }
 
     private void OnDisable()
@@ -69,8 +72,7 @@ public class MonsterController : MonoBehaviour
         // 컬라이더 컴포넌트 추출 후 리스트에 저장
         _monsterTr.GetComponentsInChildren<Collider>(_colliders);
         
-        StartCoroutine(CheckMonsterState());
-        StartCoroutine(MonsterAction());
+
     }
 
     // 코루틴 1 - 몬스터의 상태를 갱신 (0.3초)

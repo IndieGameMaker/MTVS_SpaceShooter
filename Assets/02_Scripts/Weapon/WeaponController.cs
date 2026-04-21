@@ -10,12 +10,12 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private AudioClip _fireSfx;
     [SerializeField] private MeshRenderer _muzzleFlash;
-
+    [SerializeField] private LayerMask _fireMask;
+    
     // 연사속도
     [SerializeField] private float _fireRate = 0.15f;
     // 다음 발사 시각
     private float _nextFire;
-    
     private AudioSource _audio;
 
     private void Start()
@@ -34,6 +34,8 @@ public class WeaponController : MonoBehaviour
     void Update()
     {
         FireBullet();
+        Debug.DrawRay(_firePos.position, _firePos.forward * 10.0f, Color.green);
+
     }
 
     private void FireBullet()
@@ -56,14 +58,15 @@ public class WeaponController : MonoBehaviour
                 // 풀에서 사용가능한 총알을 꺼내오기
                 var bullet = BulletPool.Instance.Get();
                 bullet.Fire(_firePos.position, _firePos.rotation);
-                
-                // Instantiate(_bulletPrefab, _firePos.position, _firePos.rotation);
                 // 음원 재생
-                // AudioSource.Play("음원이름");
-                // AudioSource.PlayOneShot(AudioClip, 볼륨);
                 _audio.PlayOneShot(_fireSfx, 0.8f);
                 // 총구 화염 효과
                 StartCoroutine(ShowMuzzleFlash());
+                
+                if (Physics.Raycast(_firePos.position, _firePos.forward, out RaycastHit hit, 10.0f, _fireMask))
+                {
+                    Debug.Log($"Hit : {hit.collider.name}");
+                }                
             }
         }
     }
