@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 // 몬스터 캐릭터 컨트롤러 클래스
-public class MonsterController : MonoBehaviour
+public class MonsterController : MonoBehaviour, IDamageable
 {
     // 몬스터 상태 정의 (Enum)
     public enum State
@@ -163,15 +163,18 @@ public class MonsterController : MonoBehaviour
         {
             // 오브젝트 풀로 반환
             BulletPool.Instance.Return(coll.gameObject.GetComponent<Bullet>());
-            // Destroy(coll.gameObject);
-            _animator.SetTrigger(hashHit);
-            _hp -= 10.0f;
-
-            if (_hp <= 0.0f)
-            {
-                _state = State.DEAD;
-            }
         }
+    }
+    
+    public void TakeDamage(int damage)
+    {
+        _animator.SetTrigger(hashHit);
+        _hp -= (float)damage;
+
+        if (_hp <= 0.0f)
+        {
+            _state = State.DEAD;
+        }        
     }
 
     private void ToggleColliders(bool active)
@@ -202,4 +205,5 @@ public class MonsterController : MonoBehaviour
     //     // 추적 사정거리 여부 확인
     //     // 공격 사정거리 여부 확인
     // }
+
 }
