@@ -139,7 +139,7 @@ public class MonsterController : MonoBehaviour
                     _animator.SetTrigger(hashDead);
                     ToggleColliders(false);
                     
-                    // TODO: 오브젝트 풀로 반환
+                    
                     break;
             }
 
@@ -151,8 +151,9 @@ public class MonsterController : MonoBehaviour
     {
         if (!_isDead && coll.collider.CompareTag("BULLET"))
         {
-            
-            Destroy(coll.gameObject);
+            // 오브젝트 풀로 반환
+            BulletPool.Instance.Return(coll.gameObject.GetComponent<Bullet>());
+            // Destroy(coll.gameObject);
             _animator.SetTrigger(hashHit);
             _hp -= 10.0f;
 

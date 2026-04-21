@@ -15,6 +15,10 @@ public class Bullet : MonoBehaviour
     {
         transform.SetPositionAndRotation(pos, rot);
         
+        // 물리 속성 초기화
+        _rb.linearVelocity = _rb.angularVelocity = Vector3.zero;
+        _rb.rotation = rot;
+        
         // 뉴튼(N)
         _rb.AddRelativeForce(Vector3.forward * _force);
     }
