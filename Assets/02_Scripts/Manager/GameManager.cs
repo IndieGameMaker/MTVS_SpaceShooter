@@ -45,7 +45,9 @@ public class GameManager : MonoBehaviour
         // 난수 발생
         int idx = Random.Range(1, _points.Count);
 
-        var monster = Instantiate(_monsterPrefab);
+        // var monster = Instantiate(_monsterPrefab);
+        var monster = MonsterPool.Instance.pool.Get();
+        
         monster.name = $"Monster_{idx}";
 
         monster.transform.position = _points[idx].position;
