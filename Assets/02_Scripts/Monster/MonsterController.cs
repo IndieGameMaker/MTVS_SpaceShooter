@@ -139,7 +139,15 @@ public class MonsterController : MonoBehaviour
                     _animator.SetTrigger(hashDead);
                     ToggleColliders(false);
                     
-                    
+                    // 잠시 기다린 후 처리
+                    yield return new WaitForSeconds(2.0f);
+                    // 각종 수치 초기화
+                    _hp = 100.0f;
+                    _state = State.IDLE;
+                    _isDead = false;
+                    ToggleColliders(true); // 컬라이터 활성화
+                    // 오브젝트 풀 반납
+                    MonsterPool.Instance.pool.Release(this);
                     break;
             }
 
