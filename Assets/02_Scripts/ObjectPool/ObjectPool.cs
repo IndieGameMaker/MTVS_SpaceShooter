@@ -17,7 +17,7 @@ public class ObjectPool<T> : MonoBehaviour where T : Component
             // 생성
             T obj = Instantiate(_prefab);
             // 큐에 넣기 전에 비활서화
-            obj.gameObject.SetActive(false);
+            obj.gameObject.SetActive(false); // Awake, OnEnable, OnDisable
             // 큐에 적재
             _pool.Enqueue(obj);
         }
