@@ -32,6 +32,12 @@ public class GameManager : MonoBehaviour
         
         // 몬스터 프리팹 로딩
         _monsterPrefab = Resources.Load<GameObject>("Monster");
+        
+        // 델리게이트함수.Invoke();
+        // Invoke("함수명", 지연시간)
+        // InvokeRepeating("함수명", 지연시간, 반복간격)
+        
+        InvokeRepeating("CreateMonster", 1.0f, _createTime);
     }
 
     private void CreateMonster()
