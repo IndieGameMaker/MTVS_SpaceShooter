@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
     private float _initHp = 100.0f;
     private float _currHp = 100.0f;
     
+    // 이벤트 채널 스크립터블 오브젝트
+    [SerializeField] private HealthEventSO healthEventSO;
+    
     // 델리게이트 (Delegate) : 대리자 , 함수를 저장하기 위한 데이터를 정의
     // int hp = 100;
     // public void Sum (int a, int b) { return a + b;};
@@ -81,6 +84,10 @@ public class PlayerController : MonoBehaviour
     {
         _currHp -= damage;
         // _hpBar.fillAmount = _currHp / _initHp;
+        
+        // 이벤트 채널에게 데미지 이벤트 호출 요청
+        healthEventSO.Raise((int)_currHp);
+        
         if (_currHp <= 0.0f)
         {
             // 주인공 사망 처리

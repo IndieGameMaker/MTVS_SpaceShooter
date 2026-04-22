@@ -964,6 +964,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   _speed: 8
   _rotateSpeed: 500
+  healthEventSO: {fileID: 11400000, guid: 7cb806a8f6c8e46dd90abe44c0f66da9, type: 2}
 --- !u!4 &1153353361 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400092, guid: 8daa50189dd68ef46b8bd15dad17a34c, type: 3}
