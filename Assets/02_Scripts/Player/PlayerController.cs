@@ -89,6 +89,11 @@ public class PlayerController : MonoBehaviour
             
             // 이벤트 발행 (Event Raise)
             OnPlayerDead?.Invoke();
+            
+            // GameManager의 IsGameOver 변경
+            GameManager.Instance.IsGameOver = true;
+            
+            // GameObject.Find("GameManager").GetComponent<GameManager>().IsGameOver = true;
         }
     }
 

@@ -12,8 +12,29 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _monsterPrefab;
     [SerializeField] private float _createTime = 3.0f;
 
+    // 필드(Field) - 외부에 공개하지 않는 변수
+    private bool _isGameOver = false; // camel Case (단봉 낙타법) - 변수
+    
+    // 프로퍼티 - 외부 접근 가능한 일종의 변수 // Pascal Case (파스칼) - 클래스, 메서드 
+    public bool IsGameOver
+    {
+        get { return _isGameOver;  }
+        set
+        {
+            _isGameOver = value;
+            if (_isGameOver == true)
+            {
+                // InvokeRepeating으로 호출한 메서드를 정지
+                CancelInvoke(nameof(CreateMonster));
+            }
+        }
+    }
+    
     private void Awake()
     {
+        // bool temp = GameManager.Instance.IsGameOver; // getter 영역 실행
+        // GameManager.Instance.IsGameOver = true; // setter 영역 실행
+        
         if (Instance == null)
         {
             Instance = this;
