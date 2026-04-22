@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(AudioSource))]
@@ -12,11 +11,27 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private MeshRenderer _muzzleFlash;
     [SerializeField] private LayerMask _fireMask;
     
-    // 연사속도
+    [SerializeField] private InputEventSO _inputEventSO;
+
     [SerializeField] private float _fireRate = 0.15f;
-    // 다음 발사 시각
     private float _nextFire;
+    private bool _isFiring;
     private AudioSource _audio;
+
+    private void OnEnable()
+    {
+        _inputEventSO.SubscribeAttack(OnAttackInput);
+    }
+
+    private void OnDisable()
+    {
+        _inputEventSO.UnsubscribeAttack(OnAttackInput);
+    }
+
+    private void OnAttackInput(bool isPressed)
+    {
+        _isFiring = isPressed;
+    }
 
     private void Start()
     {
@@ -40,16 +55,7 @@ public class WeaponController : MonoBehaviour
 
     private void FireBullet()
     {
-        // Legacy InputManager 사용한 방법
-        if (Input.GetMouseButtonDown(0))
-        {
-            // 총 발사 로직
-            // Instantiate(생성할객체, 위치, 각도, 부모게임오브젝트)
-            // Instantiate(_bulletPrefab, _firePos.position, _firePos.rotation);
-        }
-
-        // New InputSystem 사용한 방법
-        if (Mouse.current.leftButton.isPressed)
+        if (_isFiring)
         {
             if (Time.time > _nextFire)
             {

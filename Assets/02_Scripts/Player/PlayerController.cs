@@ -20,8 +20,8 @@ public class PlayerController : MonoBehaviour
     private float _initHp = 100.0f;
     private float _currHp = 100.0f;
     
-    // 이벤트 채널 스크립터블 오브젝트
     [SerializeField] private HealthEventSO healthEventSO;
+    [SerializeField] private InputEventSO inputEventSO;
     
     // 델리게이트 (Delegate) : 대리자 , 함수를 저장하기 위한 데이터를 정의
     // int hp = 100;
@@ -50,6 +50,18 @@ public class PlayerController : MonoBehaviour
  */   
     #region 유니티 콜백 메서드
 
+    private void OnEnable()
+    {
+        inputEventSO.SubscribeMove(OnMoveInput);
+        inputEventSO.SubscribeLook(OnLookInput);
+    }
+
+    private void OnDisable()
+    {
+        inputEventSO.UnsubscribeMove(OnMoveInput);
+        inputEventSO.UnsubscribeLook(OnLookInput);
+    }
+
     private void Start()
     {
         _animator = GetComponent<Animator>();
@@ -57,7 +69,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        InputHandler();
         Movement();
         Animate();
     }
@@ -119,11 +130,15 @@ public class PlayerController : MonoBehaviour
 
     #region 입력처리
 
-    private void InputHandler()
+    private void OnMoveInput(Vector2 input)
     {
-        v = Input.GetAxis("Vertical"); // -1.0f ~ 0.0f ~ +1.0f
-        h = Input.GetAxis("Horizontal"); // -1.0f ~ 0.0f ~ +1.0f
-        r = Input.GetAxis("Mouse X"); // -   /   +
+        h = input.x;
+        v = input.y;
+    }
+
+    private void OnLookInput(Vector2 input)
+    {
+        r = input.x * 0.2f;
     }
     #endregion
 

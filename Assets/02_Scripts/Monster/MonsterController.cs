@@ -48,8 +48,9 @@ public class MonsterController : MonoBehaviour, IDamageable
 
     private void OnEnable()
     {
-        // 이벤트 구독 (Subscribe)
+        // 이벤트 구독 (Subscribe)  
         PlayerController.OnPlayerDead += this.OnPlayerDead;
+        
         
         StartCoroutine(CheckMonsterState());
         StartCoroutine(MonsterAction());        

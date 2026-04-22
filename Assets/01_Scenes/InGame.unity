@@ -965,6 +965,7 @@ MonoBehaviour:
   _speed: 8
   _rotateSpeed: 500
   healthEventSO: {fileID: 11400000, guid: 7cb806a8f6c8e46dd90abe44c0f66da9, type: 2}
+  inputEventSO: {fileID: 11400000, guid: d6e6b2d610ec643a395fb916f92e5aa2, type: 2}
 --- !u!4 &1153353361 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400092, guid: 8daa50189dd68ef46b8bd15dad17a34c, type: 3}
@@ -989,6 +990,7 @@ MonoBehaviour:
   _fireMask:
     serializedVersion: 2
     m_Bits: 768
+  _inputEventSO: {fileID: 11400000, guid: d6e6b2d610ec643a395fb916f92e5aa2, type: 2}
   _fireRate: 0.1
 --- !u!82 &1153353364
 AudioSource:
@@ -1137,6 +1139,51 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!1 &1424445137
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1424445139}
+  - component: {fileID: 1424445138}
+  m_Layer: 0
+  m_Name: InputHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1424445138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424445137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b14563cc3c8447a96b134185986ee53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InputHandler
+  _inputEventSO: {fileID: 11400000, guid: d6e6b2d610ec643a395fb916f92e5aa2, type: 2}
+--- !u!4 &1424445139
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424445137}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1519279079
 GameObject:
   m_ObjectHideFlags: 0
@@ -1335,3 +1382,4 @@ SceneRoots:
   - {fileID: 335446583}
   - {fileID: 398119609}
   - {fileID: 880585782}
+  - {fileID: 1424445139}
