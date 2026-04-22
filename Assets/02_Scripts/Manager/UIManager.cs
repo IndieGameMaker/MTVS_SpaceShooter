@@ -23,7 +23,9 @@ public class UIManager : MonoBehaviour
     {
         // 씬 로딩
         // Debug.Log("시작버튼 클릭됨");
-        SceneManager.LoadScene("InGame");  // 씬의 이름을 로딩
+        SceneManager.LoadScene("Level01");
+        SceneManager.LoadScene("InGame", LoadSceneMode.Additive);  // 씬의 이름을 로딩
+        SceneManager.LoadScene("UI", LoadSceneMode.Additive);
         // SceneManager.LoadScene(1);  // 씬의 Index으로 로딩
         
     }
