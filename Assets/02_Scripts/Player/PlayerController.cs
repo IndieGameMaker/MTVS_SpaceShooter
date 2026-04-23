@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float _speed = 8.0f;
     [SerializeField] private float _rotateSpeed = 200.0f;
-
+    
     private Animator _animator;
     
     // 애니메이션 파라메터 해시값 추출
@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     
     // 이벤트 채널 스크립터블 오브젝트
     [SerializeField] private HealthEventSO healthEventSO;
+    [SerializeField] private InputEventSO _inputEventSO;
     
     // 델리게이트 (Delegate) : 대리자 , 함수를 저장하기 위한 데이터를 정의
     // int hp = 100;
@@ -49,6 +50,17 @@ public class PlayerController : MonoBehaviour
     OnPlayerDead?.Invoke();
  */   
     #region 유니티 콜백 메서드
+
+    private void OnEnable()
+    {
+        _inputEventSO.SubscribeMove(OnMoveInput);
+    }
+
+    private void OnDisable()
+    {
+        _inputEventSO.UnsubscribeMove(OnMoveInput);
+    }
+
 
     private void Start()
     {
@@ -119,10 +131,16 @@ public class PlayerController : MonoBehaviour
 
     #region 입력처리
 
+    private void OnMoveInput(Vector2 input)
+    {
+        v = input.y;
+        h = input.x;
+    }
+    
     private void InputHandler()
     {
-        v = Input.GetAxis("Vertical"); // -1.0f ~ 0.0f ~ +1.0f
-        h = Input.GetAxis("Horizontal"); // -1.0f ~ 0.0f ~ +1.0f
+        // v = Input.GetAxis("Vertical"); // -1.0f ~ 0.0f ~ +1.0f
+        // h = Input.GetAxis("Horizontal"); // -1.0f ~ 0.0f ~ +1.0f
         r = Input.GetAxis("Mouse X"); // -   /   +
     }
     #endregion
