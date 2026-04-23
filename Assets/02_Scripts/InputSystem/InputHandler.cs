@@ -1,9 +1,14 @@
+// 전처리기 (PreProcessor)
+//#define INPUTACTION_REF
+//#define WRAPPER_CLASS
+
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class InputHandler : MonoBehaviour
 {
+    #if INPUTACTION_REF    
     [Header("InputActionReference")]
     [SerializeField]
     private InputActionReference _moveAction;
@@ -17,6 +22,16 @@ public class InputHandler : MonoBehaviour
         
         // 액션을 활성화
         _moveAction.action.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _moveAction.action.started -= OnMove;
+        _moveAction.action.performed -= OnMove;
+        _moveAction.action.canceled -= OnMove;
+        
+        // 액션 비활성화
+        _moveAction.action.Disable();
     }
 
     private void OnMove(InputAction.CallbackContext ctx)
@@ -35,4 +50,15 @@ public class InputHandler : MonoBehaviour
                 break;
         }
     }
+    #endif
+    
+    #if WRAPPER_CLASS
+    private InputSystem_Actions _inputSystemActions;
+
+    private void Awake()
+    {
+        _inputSystemActions = new InputSystem_Actions();
+        _inputSystemActions.Enable();
+    }
+    #endif
 }

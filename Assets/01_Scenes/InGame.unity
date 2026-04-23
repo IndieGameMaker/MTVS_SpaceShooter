@@ -974,7 +974,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b14563cc3c8447a96b134185986ee53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputHandler
-  _moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!4 &1122631571
 Transform:
   m_ObjectHideFlags: 0
