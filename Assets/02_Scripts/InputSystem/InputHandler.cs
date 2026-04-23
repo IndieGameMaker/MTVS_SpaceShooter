@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 
 public class InputHandler : MonoBehaviour
 {
-    #if INPUTACTION_REF    
+#if INPUTACTION_REF
     [Header("InputActionReference")]
     [SerializeField]
     private InputActionReference _moveAction;
@@ -50,9 +50,9 @@ public class InputHandler : MonoBehaviour
                 break;
         }
     }
-    #endif
-    
-    #if WRAPPER_CLASS
+#endif
+
+#if WRAPPER_CLASS
     [SerializeField] private InputEventSO _inputEventSO;
     private InputSystem_Actions _inputSystemActions;
 
@@ -68,9 +68,10 @@ public class InputHandler : MonoBehaviour
         // 이동 액션 바인딩
         _inputSystemActions.Player.Move.performed += OnMove;
         _inputSystemActions.Player.Move.canceled += OnMove;
-        
+
         // 회전 액션 바인딩
         _inputSystemActions.Player.Look.performed += OnLook;
+        _inputSystemActions.Player.Look.canceled += OnLook;
     }
 
     private void OnDisable()
@@ -78,15 +79,24 @@ public class InputHandler : MonoBehaviour
         _inputSystemActions.Player.Move.performed -= OnMove;
         _inputSystemActions.Player.Move.canceled -= OnMove;
         _inputSystemActions.Player.Look.performed -= OnLook;
-        
+        _inputSystemActions.Player.Look.canceled -= OnLook;
+
         _inputSystemActions.Disable();
     }
 
     private void OnLook(InputAction.CallbackContext ctx)
     {
         // 이벤트 채널에게 Look 이벤트를 발행 요청
-        _inputEventSO.RaiseLook(ctx.ReadValue<Vector2>());
+        if (ctx.phase == InputActionPhase.Performed)
+        {
+            _inputEventSO.RaiseLook(ctx.ReadValue<Vector2>());
+        }
+        else if (ctx.phase == InputActionPhase.Canceled)
+        {
+            _inputEventSO.RaiseLook(Vector2.zero);
+        }
     }
+
 
     private void OnMove(InputAction.CallbackContext ctx)
     {

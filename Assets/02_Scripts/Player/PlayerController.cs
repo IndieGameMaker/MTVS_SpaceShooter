@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour
     
     private void OnLookInput(Vector2 input)
     {
-        r = input.y * 0.2f;
+        r = input.x * 0.2f;
         // v = Input.GetAxis("Vertical"); // -1.0f ~ 0.0f ~ +1.0f
         // h = Input.GetAxis("Horizontal"); // -1.0f ~ 0.0f ~ +1.0f
         // r = Input.GetAxis("Mouse X"); // -   /   +
