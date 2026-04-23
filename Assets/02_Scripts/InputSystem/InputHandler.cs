@@ -53,6 +53,7 @@ public class InputHandler : MonoBehaviour
     #endif
     
     #if WRAPPER_CLASS
+    [SerializeField] private InputEventSO _inputEventSO;
     private InputSystem_Actions _inputSystemActions;
 
     private void Awake()
@@ -83,11 +84,15 @@ public class InputHandler : MonoBehaviour
 
     private void OnLook(InputAction.CallbackContext ctx)
     {
+        // 이벤트 채널에게 Look 이벤트를 발행 요청
+        _inputEventSO.RaiseLook(ctx.ReadValue<Vector2>());
     }
 
     private void OnMove(InputAction.CallbackContext ctx)
     {
         Debug.Log($"OnMove Performed: {ctx.ReadValue<Vector2>()}");
+        // 이벤트 채널에게 Move 이벤트를 발행 요청
+        _inputEventSO.RaiseMove(ctx.ReadValue<Vector2>());
     }
 #endif
 }
