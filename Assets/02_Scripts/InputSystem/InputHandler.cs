@@ -10,9 +10,13 @@ public class InputHandler : MonoBehaviour
 
     private void OnEnable()
     {
+        // 액션의 페이즈에 따라서 다른 로직을 수행
         _moveAction.action.started += OnMove;
         _moveAction.action.performed += OnMove;
         _moveAction.action.canceled += OnMove;
+        
+        // 액션을 활성화
+        _moveAction.action.Enable();
     }
 
     private void OnMove(InputAction.CallbackContext ctx)
