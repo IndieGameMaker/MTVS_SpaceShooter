@@ -72,6 +72,15 @@ public class InputHandler : MonoBehaviour
         _inputSystemActions.Player.Look.performed += OnLook;
     }
 
+    private void OnDisable()
+    {
+        _inputSystemActions.Player.Move.performed -= OnMove;
+        _inputSystemActions.Player.Move.canceled -= OnMove;
+        _inputSystemActions.Player.Look.performed -= OnLook;
+        
+        _inputSystemActions.Disable();
+    }
+
     private void OnLook(InputAction.CallbackContext ctx)
     {
     }
