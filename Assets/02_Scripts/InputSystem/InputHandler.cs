@@ -5,15 +5,30 @@ using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
 {
     [Header("InputActionReference")]
-    [SerializeField] private InputActionReference _moveAction;
+    [SerializeField]
+    private InputActionReference _moveAction;
 
     private void OnEnable()
     {
         _moveAction.action.started += OnMove;
+        _moveAction.action.performed += OnMove;
+        _moveAction.action.canceled += OnMove;
     }
 
     private void OnMove(InputAction.CallbackContext ctx)
     {
-        Debug.Log($"OnMove Started: {ctx.started}");
+        // 페이즈에 따라서 다른 로직으로 분기
+        switch (ctx.action.phase)
+        {
+            case InputActionPhase.Started:
+                Debug.Log($"OnMove Started: {ctx.started}");
+                break;
+            case InputActionPhase.Performed:
+                Debug.Log($"OnMove Performed: {ctx.ReadValue<Vector2>()}");
+                break;
+            case InputActionPhase.Canceled:
+                Debug.Log($"OnMove Canceled: {ctx.canceled}");
+                break;
+        }
     }
 }
