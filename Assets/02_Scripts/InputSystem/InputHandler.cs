@@ -57,8 +57,28 @@ public class InputHandler : MonoBehaviour
 
     private void Awake()
     {
+        // 래퍼 클래스 생성 및 활성화
         _inputSystemActions = new InputSystem_Actions();
         _inputSystemActions.Enable();
     }
-    #endif
+
+    private void OnEnable()
+    {
+        // 이동 액션 바인딩
+        _inputSystemActions.Player.Move.performed += OnMove;
+        _inputSystemActions.Player.Move.canceled += OnMove;
+        
+        // 회전 액션 바인딩
+        _inputSystemActions.Player.Look.performed += OnLook;
+    }
+
+    private void OnLook(InputAction.CallbackContext ctx)
+    {
+    }
+
+    private void OnMove(InputAction.CallbackContext ctx)
+    {
+        Debug.Log($"OnMove Performed: {ctx.ReadValue<Vector2>()}");
+    }
+#endif
 }
