@@ -54,11 +54,13 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         _inputEventSO.SubscribeMove(OnMoveInput);
+        _inputEventSO.SubscribeLook(OnLookInput);
     }
 
     private void OnDisable()
     {
         _inputEventSO.UnsubscribeMove(OnMoveInput);
+        _inputEventSO.UnsubscribeLook(OnLookInput);
     }
 
 
@@ -69,7 +71,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        InputHandler();
         Movement();
         Animate();
     }
@@ -137,11 +138,12 @@ public class PlayerController : MonoBehaviour
         h = input.x;
     }
     
-    private void InputHandler()
+    private void OnLookInput(Vector2 input)
     {
+        r = input.y * 0.2f;
         // v = Input.GetAxis("Vertical"); // -1.0f ~ 0.0f ~ +1.0f
         // h = Input.GetAxis("Horizontal"); // -1.0f ~ 0.0f ~ +1.0f
-        r = Input.GetAxis("Mouse X"); // -   /   +
+        // r = Input.GetAxis("Mouse X"); // -   /   +
     }
     #endregion
 
