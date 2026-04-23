@@ -72,6 +72,7 @@ public class InputHandler : MonoBehaviour
         // 회전 액션 바인딩
         _inputSystemActions.Player.Look.performed += OnLook;
         _inputSystemActions.Player.Look.canceled += OnLook;
+        //_inputSystemActions.Player.Look.canceled += (ctx) => _inputEventSO.RaiseLook(Vector2.zero);
     }
 
     private void OnDisable()
